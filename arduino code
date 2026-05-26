@@ -1,0 +1,81 @@
+#include <avr/pgmspace.h>
+#include <Wire.h> 
+#include <LiquidCrystal_I2C.h>
+
+// Initialize LCD at address 0x27 (16 columns, 2 rows)
+LiquidCrystal_I2C lcd(0x27, 16, 2); 
+
+struct LyricLine {
+  const char* line1;
+  const char* line2;
+  int display_time_ms; // Exactly how long this specific screen page stays visible
+};
+
+// Break the track into complete 2-line pages that fit the 16-character limits
+const char p0_1[] PROGMEM = "  [Dhurandhar]  ";
+const char p0_2[] PROGMEM = "  Intro Alaap   ";
+
+const char p1_1[] PROGMEM = "Dil pe zakhm    ";
+const char p1_2[] PROGMEM = "khaate hain...  ";
+
+const char p2_1[] PROGMEM = "Jaan se         ";
+const char p2_2[] PROGMEM = "guzarte hain!   ";
+
+const char p3_1[] PROGMEM = "Jurm sirf       ";
+const char p3_2[] PROGMEM = "itna hai...     ";
+
+const char p4_1[] PROGMEM = "Unko pyaar      ";
+const char p4_2[] PROGMEM = "karte hain.     ";
+
+const char p5_1[] PROGMEM = "Aitbaar badhta  ";
+const char p5_2[] PROGMEM = "hai, mohabbat ka";
+
+const char p6_1[] PROGMEM = "Jab woh ajnabi  ";
+const char p6_2[] PROGMEM = "bankar...       ";
+
+const char p7_1[] PROGMEM = "Paas se         ";
+const char p7_2[] PROGMEM = "guzarte hain... ";
+
+LyricLine track[] = {
+  {p0_1, p0_2, 4500}, 
+  {p1_1, p1_2, 4600}, 
+  {p2_1, p2_2, 4800}, 
+  {p3_1, p3_2, 4300}, 
+  {p4_1, p4_2, 4800}, 
+  {p5_1, p5_2, 5000}, 
+  {p6_1, p6_2, 3500}, 
+  {p7_1, p7_2, 4000}
+};
+
+void setup() {
+  lcd.init();
+  lcd.backlight();
+  
+  int total_pages = sizeof(track) / sizeof(track[0]);
+  char buf1[20]; 
+  char buf2[20]; 
+
+  for (int i = 0; i < total_pages; i++) {
+    // Read both lines out of Flash Memory
+    strcpy_P(buf1, (char*)track[i].line1);
+    strcpy_P(buf2, (char*)track[i].line2);
+    
+    // Clear display and print Line 1
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print(buf1);
+    
+    // Print Line 2
+    lcd.setCursor(0, 1);
+    lcd.print(buf2);
+    
+    // Hold this page on screen to match the speed of the song lyrics
+    if (track[i].display_time_ms > 0) {
+      delay(track[i].display_time_ms);
+    }
+  }
+}
+
+void loop() {
+  // End of track sequence loop lock
+}
