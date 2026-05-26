@@ -10,10 +10,10 @@ The main issue i faced while storing lyrics was that Arduino UNO had a fixed sma
 Then I found out we could use the 32 KB flash memory also where usually code is stored.
 
 Connections-
-VCC of I2C - 5V of arduino
-GND of I2C - GND of arduino
-SDA of I2C - A4 of arduino
-SCL of I2C - A5 of arduino
+1. VCC of I2C - 5V of arduino
+2. GND of I2C - GND of arduino
+3. SDA of I2C - A4 of arduino
+4. SCL of I2C - A5 of arduino
 
 Libraries-
 1. Wire.h
