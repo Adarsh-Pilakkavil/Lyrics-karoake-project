@@ -6,7 +6,7 @@ Components Used:
 3. I2C backpack adapter- Helped me to reduce the amount of connections into total 4 wires (VCC, GND, SDA and SCL)
 4. USB cables- For sending codes to the arduino
 
-The main issue i faced while storing lyrics was that Arduino UNO had a fixed small SRAM of 2KB, so it couldnt store much of the lyrics. 
+The main issue I faced while storing lyrics was that Arduino UNO had a fixed small SRAM of 2KB, so it couldnt store much of the lyrics. 
 Then I found out we could use the 32 KB flash memory also where usually code is stored.
 
 Connections-
