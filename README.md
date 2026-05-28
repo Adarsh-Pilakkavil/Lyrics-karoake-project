@@ -1,3 +1,5 @@
+<img width="130" height="288" alt="WhatsApp Image 2026-05-28 at 11 33 49 PM" src="https://github.com/user-attachments/assets/55b05c16-0c3c-446d-884e-c3197c893ac6" />
+
 Hey! I have built a simple lyrics karoake project where I stored lyrics and display them at specific time stamps (just like a karoake video). 
 
 Components Used:
